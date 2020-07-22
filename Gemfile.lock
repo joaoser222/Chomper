@@ -56,6 +56,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
     bcrypt (3.1.13)
     bootsnap (1.4.6)
       msgpack (~> 1.0)
@@ -69,12 +71,34 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-jwt (0.8.0)
+      devise (~> 4.0)
+      warden-jwt_auth (~> 0.5)
+    diff-lcs (1.4.4)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
+    dry-auto_inject (0.7.0)
+      dry-container (>= 0.3.4)
+    dry-configurable (0.11.6)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.4, >= 0.4.7)
+      dry-equalizer (~> 0.2)
+    dry-container (0.7.2)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.1, >= 0.1.3)
+    dry-core (0.4.9)
+      concurrent-ruby (~> 1.0)
+    dry-equalizer (0.3.0)
     erubi (1.9.0)
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.4)
       concurrent-ruby (~> 1.0)
+    json-schema (2.8.1)
+      addressable (>= 2.4)
     jwt (2.2.1)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -97,6 +121,7 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.3)
@@ -137,6 +162,36 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec-core (3.9.2)
+      rspec-support (~> 3.9.3)
+    rspec-expectations (3.9.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-rails (3.9.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
+      rspec-support (~> 3.9.0)
+    rspec-support (3.9.3)
+    rswag (2.3.1)
+      rswag-api (= 2.3.1)
+      rswag-specs (= 2.3.1)
+      rswag-ui (= 2.3.1)
+    rswag-api (2.3.1)
+      railties (>= 3.1, < 7.0)
+    rswag-specs (2.3.1)
+      activesupport (>= 3.1, < 7.0)
+      json-schema (~> 2.2)
+      railties (>= 3.1, < 7.0)
+    rswag-ui (2.3.1)
+      actionpack (>= 3.1, < 7.0)
+      railties (>= 3.1, < 7.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -154,9 +209,15 @@ GEM
       thread_safe (~> 0.1)
     warden (1.2.8)
       rack (>= 2.0.6)
+    warden-jwt_auth (0.5.0)
+      dry-auto_inject (~> 0.6)
+      dry-configurable (~> 0.9)
+      jwt (~> 2.1)
+      warden (~> 1.2)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.3.0)
     zeitwerk (2.4.0)
 
 PLATFORMS
@@ -167,15 +228,21 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   devise
-  jwt
+  devise-jwt
+  dotenv-rails
   listen (~> 3.2)
   mysql2
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3, >= 6.0.3.2)
+  rspec-rails (~> 3.5)
+  rswag
+  rswag-api
+  rswag-ui
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  will_paginate
 
 RUBY VERSION
    ruby 2.7.1p83
