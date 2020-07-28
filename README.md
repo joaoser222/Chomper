@@ -1,24 +1,16 @@
-# README
+# Chomper: API para anúncios de Comida
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A seguir o tutorial para configuração local do API
 
-Things you may want to cover:
+* Crie um .env baseado no  .env.example e configure os dados que existem nele
 
-* Ruby version
+* Execute os seguintes comandos:
 
-* System dependencies
+```console
+[user@linux Chomper]$ bundle install --path vendor/bundle   
+[user@linux Chomper]$ rake db:create   
+[user@linux Chomper]$ rake db:migrate   
+[user@linux Chomper]$ rake db:seed   
+```
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
