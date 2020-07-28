@@ -27,7 +27,8 @@ gem 'rack-cors'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails'
+  gem 'rswag-specs'
 end
 
 group :development do
@@ -41,8 +42,8 @@ end
 gem 'devise'
 gem 'devise-jwt'
 gem 'dotenv-rails'
+gem 'geocoder'
 gem 'mysql2'
-gem 'rswag'
 gem 'rswag-api'
 gem 'rswag-ui'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
