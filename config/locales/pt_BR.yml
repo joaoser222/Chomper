@@ -1,0 +1,13 @@
+pt_BR:
+  activerecord:
+    errors:
+      messages:
+        blank: "O campo não pode estar vazio"
+        invalid: "O campo contém valor inválido"
+        too_short: "O campo é menor que o tamanho mínimo"
+        too_long: "O campo é maior que o tamanho máximo"
+        not_a_number: "O campo deve ser numérico"
+        not_an_integer: "O campo deve ser um valor inteiro"
+        taken: "O campo deve ser único"
+        inclusion: "O campo deve estar contido na lista de valores"
+        wrong_length: "O campo possui tamanho incorreto"
