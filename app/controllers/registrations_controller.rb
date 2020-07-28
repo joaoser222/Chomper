@@ -1,4 +1,4 @@
-class RegistrationsController < Devise::RegistrationsController
+class RegistrationsController < ApplicationController
   respond_to :json
   before_action :authenticate_user!, only: [:profile,:upload_photo]
 
@@ -23,10 +23,12 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-    if resource.errors.empty?
-      render json: resource
+  def register
+    user = User.create(item_params.merge(:kind => request.url.split('/').last.split('?').first))
+    if user.valid?
+      render json: { success: 'Usuário cadastrado com sucesso!' }
     else
-      render json: resource.errors
+      render json: user.errors.messages, status: :unprocessable_entity
     end
   end
 
@@ -45,4 +47,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def item_params
+    params.require(:user).permit(:name, :phone, :document, :state, :city, :district, :street, :email, :latitude, :longitude, :radius, :password, :password_confirmation, :kind)
+  end
 end
