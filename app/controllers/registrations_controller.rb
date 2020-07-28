@@ -30,10 +30,19 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  private
+  def password_reset
+    if User.find_by(email: params[:email]).send_reset_password_instructions
+      head :ok
+    end
+  end
 
-  def sign_up_params
-    params.require(:user).permit(:name, :email, :localization, :password, :password_confirmation)
+  def password_edit
+    errors = User.reset_password_by_token(params.slice(:reset_password_token, :password, :password_confirmation)).errors.messages
+    if errors
+      render json: errors, status: 422
+    else
+      render status: 200
+    end
   end
 
 end
