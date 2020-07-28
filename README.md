@@ -12,5 +12,8 @@ rake db:create
 rake db:migrate   
 rake db:seed   
 ```
-
+* Feito isto basta executar o comando para iniciar o rails:
+```console
+rails s 
+```
 
