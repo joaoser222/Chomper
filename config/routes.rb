@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine, at: '/api-docs'
   mount Rswag::Api::Engine, at: '/api-docs'
   resources :adverts
+  post 'adverts/:id/upload_photo', to: 'adverts#upload_photo'
+  post 'users/:id/upload_photo', to: 'users#upload_photo'
   devise_for :users,skip: [:sessions, :registrations, :passwords]
   devise_scope :user do
     post 'login', to: 'sessions#create', as: :user_session
