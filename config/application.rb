@@ -35,5 +35,14 @@ module Chomper
       end
     end
     config.api_only = true
+    config.action_mailer.smtp_settings = {
+      address: ENV["MAIL_HOST"],
+      port: ENV["MAIL_PORT"],
+      domain: ENV["MAIL_HOST"],
+      authentication: "plain",
+      enable_starttls_auto: true,
+      user_name: ENV["MAIL_USERNAME"],
+      password:ENV["MAIL_PASSWORD"]
+    }
   end
 end
