@@ -1,6 +1,7 @@
 class CreateAdverts < ActiveRecord::Migration[6.0]
   def change
     create_table :adverts do |t|
+      t.string :name,         null: false, default: ''
       t.string :description,  null: false, default: ''
       t.string :status,       null: false, default: 'a'
       t.decimal :price,       null: false, precision: 10, scale: 3
