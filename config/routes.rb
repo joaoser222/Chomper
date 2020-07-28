@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine, at: '/api-docs'
   resources :adverts
   post 'adverts/:id/upload_photo', to: 'adverts#upload_photo'
+  resources :users
   post 'users/:id/upload_photo', to: 'users#upload_photo'
   devise_for :users,skip: [:sessions, :registrations, :passwords]
   devise_scope :user do
@@ -15,4 +16,5 @@ Rails.application.routes.draw do
     put 'profile', to: 'registrations#profile'
     post 'profile/upload_photo', to: 'registrations#upload_photo'
   end
+
 end
