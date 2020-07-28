@@ -7,10 +7,10 @@ A seguir o tutorial para configuração local do API
 * Execute os seguintes comandos:
 
 ```console
-[user@linux Chomper]$ bundle install --path vendor/bundle   
-[user@linux Chomper]$ rake db:create   
-[user@linux Chomper]$ rake db:migrate   
-[user@linux Chomper]$ rake db:seed   
+bundle install --path vendor/bundle   
+rake db:create   
+rake db:migrate   
+rake db:seed   
 ```
 
 
