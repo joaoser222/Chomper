@@ -1,0 +1,878 @@
+---
+openapi: 3.0.1
+info:
+  title: API Chomper
+  version: v1
+paths:
+  "/adverts":
+    get:
+      summary: Lista Anúncios
+      description: "Esta rota se comporta de forma diferente de acordo com o usuário
+        logado.\n                  Se o usuário logado for um administrador ela irá
+        exibir todos os registros.\n                  Se for um consumidor irá filtrar
+        anúncios de acordo com a Localização. Se for\n                  uma empresa
+        irá exibir anúncios somente da mesma.\n                  "
+      tags:
+      - Anúncios
+      security:
+      - JWT: {}
+      parameters:
+      - name: name
+        in: query
+        required: 
+        description: Nome
+        schema:
+          type: string
+      - name: description
+        in: query
+        required: 
+        description: Descrição
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: 
+        description: Status
+        schema:
+          type: string
+      - name: price
+        in: query
+        required: 
+        description: Preço
+        schema:
+          type: string
+      - name: image
+        in: query
+        required: 
+        description: imagem
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+    post:
+      summary: Cria Anúncios
+      tags:
+      - Anúncios
+      security:
+      - JWT: {}
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                advert:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Nome
+                    description:
+                      type: string
+                      description: Descrição
+                    status:
+                      type: string
+                      description: Status
+                    price:
+                      type: string
+                      description: Preço
+                    image:
+                      type: string
+                      description: imagem
+                  required:
+                  - name
+                  - description
+                  - status
+                  - price
+                  - image
+  "/adverts/{id}":
+    get:
+      summary: Retorna Anúncios de acordo com id passado
+      tags:
+      - Anúncios
+      security:
+      - JWT: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: 
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+    put:
+      summary: Atualiza dados de Anúncios de acordo com id passado
+      tags:
+      - Anúncios
+      security:
+      - JWT: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: 
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                advert:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Nome
+                    description:
+                      type: string
+                      description: Descrição
+                    status:
+                      type: string
+                      description: Status
+                    price:
+                      type: string
+                      description: Preço
+                    image:
+                      type: string
+                      description: imagem
+    delete:
+      summary: Deleta Anúncios de acordo com id passado
+      tags:
+      - Anúncios
+      security:
+      - JWT: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: 
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+  "/adverts/{id}/upload_photo":
+    post:
+      summary: Atualiza imagem de Anúncios
+      tags:
+      - Anúncios
+      security:
+      - JWT: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: 
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: file
+  "/register/customer":
+    post:
+      summary: Cria um novo consumidor
+      tags:
+      - Cadastros
+      parameters: []
+      responses:
+        '200':
+          description: Usuário criado com sucesso
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Nome
+                    email:
+                      type: string
+                      description: Email
+                    phone:
+                      type: string
+                      description: Telefone
+                    document:
+                      type: string
+                      description: CPF/CNPJ
+                    state:
+                      type: string
+                      description: Sigla do Estado
+                    city:
+                      type: string
+                      description: Cidade
+                    district:
+                      type: string
+                      description: Bairro
+                    street:
+                      type: string
+                      description: Rua
+                    password:
+                      type: string
+                      description: Senha
+                    password_confirmation:
+                      type: string
+                      description: Confirmação de senha
+                    latitude:
+                      type: number
+                      description: Latitude em decimais
+                    longitude:
+                      type: number
+                      description: Longitude em decimais
+                  required:
+                  - name
+                  - email
+                  - password
+                  - password_confirmation
+                  - latitude
+                  - longitude
+  "/register/company":
+    post:
+      summary: Cria uma nova empresa
+      tags:
+      - Cadastros
+      parameters: []
+      responses:
+        '200':
+          description: Usuário criado com sucesso
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Nome
+                    email:
+                      type: string
+                      description: Email
+                    phone:
+                      type: string
+                      description: Telefone
+                    document:
+                      type: string
+                      description: CPF/CNPJ
+                    state:
+                      type: string
+                      description: Sigla do Estado
+                    city:
+                      type: string
+                      description: Cidade
+                    district:
+                      type: string
+                      description: Bairro
+                    street:
+                      type: string
+                      description: Rua
+                    password:
+                      type: string
+                      description: Senha
+                    password_confirmation:
+                      type: string
+                      description: Confirmação de senha
+                    latitude:
+                      type: number
+                      description: Latitude em decimais
+                    longitude:
+                      type: number
+                      description: Longitude em decimais
+                    radius:
+                      type: integer
+                      description: Raio de atuação em metros
+                  required:
+                  - name
+                  - email
+                  - password
+                  - password_confirmation
+                  - latitude
+                  - longitude
+  "/profile":
+    put:
+      summary: Atualiza perfil do usuário logado
+      tags:
+      - Sessões
+      security:
+      - JWT: {}
+      parameters: []
+      responses:
+        '200':
+          description: Perfil alterado com sucesso
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Nome
+                    email:
+                      type: string
+                      description: Email
+                    phone:
+                      type: string
+                      description: Telefone
+                    document:
+                      type: string
+                      description: CPF/CNPJ
+                    state:
+                      type: string
+                      description: Sigla do Estado
+                    city:
+                      type: string
+                      description: Cidade
+                    district:
+                      type: string
+                      description: Bairro
+                    street:
+                      type: string
+                      description: Rua
+                    password:
+                      type: string
+                      description: Senha
+                    password_confirmation:
+                      type: string
+                      description: Confirmação de senha
+                    latitude:
+                      type: number
+                      description: Latitude em decimais
+                    longitude:
+                      type: number
+                      description: Longitude em decimais
+                    radius:
+                      type: integer
+                      description: Raio de atuação em metros
+  "/profile/upload_photo":
+    post:
+      summary: Atualiza foto de perfil do usuário logado
+      tags:
+      - Sessões
+      security:
+      - JWT: {}
+      parameters: []
+      responses:
+        '200':
+          description: Logout efetuado com sucesso
+          content: {}
+        '401':
+          description: Token inválido
+          content: {}
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: file
+  "/password/reset":
+    post:
+      summary: Efetua a alteração de senha do usuário
+      tags:
+      - Senhas
+      description: "Esta rota envia um token para o email solicitado no request. Através\n
+        \                 deste token é possível realizar a alteração de senha na
+        rota /password/edit\n                  "
+      parameters: []
+      responses:
+        '200':
+          description: Email com token enviado com sucesso
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  required: true
+  "/password/edit":
+    post:
+      summary: Efetua a alteração de senha do usuário
+      tags:
+      - Senhas
+      description: "Esta rota realiza a alteração da senha de um usuário, após o token
+        ter\n                  sido enviado para o email dele utilizando a rota /passoword/reset\n
+        \                 "
+      parameters: []
+      responses:
+        '200':
+          description: Senha alterada com sucesso
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reset_password_token:
+                  type: string
+                  required: true
+                password:
+                  type: string
+                  required: true
+                password_confirmation:
+                  type: string
+                  required: true
+  "/login":
+    post:
+      summary: Faz login de um usuário na sessão
+      tags:
+      - Sessões
+      parameters: []
+      responses:
+        '200':
+          description: Login efetuado com sucesso
+          content: {}
+        '401':
+          description: Login inválido
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+  "/logout":
+    delete:
+      summary: Faz logout de um usuário na sessão
+      tags:
+      - Sessões
+      security:
+      - JWT: {}
+      responses:
+        '200':
+          description: Logout efetuado com sucesso
+          content: {}
+        '401':
+          description: Token inválido
+          content: {}
+  "/users":
+    get:
+      summary: Lista Usuários
+      tags:
+      - Usuários
+      security:
+      - JWT: {}
+      parameters:
+      - name: name
+        in: query
+        required: 
+        description: Nome
+        schema:
+          type: string
+      - name: email
+        in: query
+        required: 
+        description: Email
+        schema:
+          type: string
+      - name: phone
+        in: query
+        required: 
+        description: Telefone
+        schema:
+          type: string
+      - name: document
+        in: query
+        required: 
+        description: CPF/CNPJ
+        schema:
+          type: string
+      - name: state
+        in: query
+        required: 
+        description: Sigla do Estado
+        schema:
+          type: string
+      - name: city
+        in: query
+        required: 
+        description: Cidade
+        schema:
+          type: string
+      - name: district
+        in: query
+        required: 
+        description: Bairro
+        schema:
+          type: string
+      - name: street
+        in: query
+        required: 
+        description: Rua
+        schema:
+          type: string
+      - name: latitude
+        in: query
+        required: 
+        description: Latitude em decimais
+        schema:
+          type: number
+      - name: longitude
+        in: query
+        required: 
+        description: Longitude em decimais
+        schema:
+          type: number
+      - name: radius
+        in: query
+        required: 
+        description: Raio de atuação em metros
+        schema:
+          type: integer
+      - name: kind
+        in: query
+        required: 
+        description: Tipo de usuário
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+    post:
+      summary: Cria Usuários
+      tags:
+      - Usuários
+      security:
+      - JWT: {}
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Nome
+                    email:
+                      type: string
+                      description: Email
+                    phone:
+                      type: string
+                      description: Telefone
+                    document:
+                      type: string
+                      description: CPF/CNPJ
+                    state:
+                      type: string
+                      description: Sigla do Estado
+                    city:
+                      type: string
+                      description: Cidade
+                    district:
+                      type: string
+                      description: Bairro
+                    street:
+                      type: string
+                      description: Rua
+                    password:
+                      type: string
+                      description: Senha
+                    password_confirmation:
+                      type: string
+                      description: Confirmação de senha
+                    latitude:
+                      type: number
+                      description: Latitude em decimais
+                    longitude:
+                      type: number
+                      description: Longitude em decimais
+                    radius:
+                      type: integer
+                      description: Raio de atuação em metros
+                    kind:
+                      type: string
+                      description: Tipo de usuário
+                  required:
+                  - name
+                  - email
+                  - password
+                  - password_confirmation
+                  - latitude
+                  - longitude
+                  - kind
+  "/users/{id}":
+    get:
+      summary: Retorna Usuários de acordo com id passado
+      tags:
+      - Usuários
+      security:
+      - JWT: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: 
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+    put:
+      summary: Atualiza dados de Usuários de acordo com id passado
+      tags:
+      - Usuários
+      security:
+      - JWT: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: 
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Nome
+                    email:
+                      type: string
+                      description: Email
+                    phone:
+                      type: string
+                      description: Telefone
+                    document:
+                      type: string
+                      description: CPF/CNPJ
+                    state:
+                      type: string
+                      description: Sigla do Estado
+                    city:
+                      type: string
+                      description: Cidade
+                    district:
+                      type: string
+                      description: Bairro
+                    street:
+                      type: string
+                      description: Rua
+                    password:
+                      type: string
+                      description: Senha
+                    password_confirmation:
+                      type: string
+                      description: Confirmação de senha
+                    latitude:
+                      type: number
+                      description: Latitude em decimais
+                    longitude:
+                      type: number
+                      description: Longitude em decimais
+                    radius:
+                      type: integer
+                      description: Raio de atuação em metros
+                    kind:
+                      type: string
+                      description: Tipo de usuário
+    delete:
+      summary: Deleta Usuários de acordo com id passado
+      tags:
+      - Usuários
+      security:
+      - JWT: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: 
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+  "/users/{id}/upload_photo":
+    post:
+      summary: Atualiza imagem de Usuários
+      tags:
+      - Usuários
+      security:
+      - JWT: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: 
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content: {}
+        '401':
+          description: Usuário não está logado
+          content: {}
+        '422':
+          description: Parâmetros incorretos
+          content: {}
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: file
+servers:
+- url: http://localhost:3000
+  variables:
+    defaultHost:
+      default: http://localhost:3000
+components:
+  securitySchemes:
+    JWT:
+      description: ''
+      type: apiKey
+      name: Authorization
+      in: header
